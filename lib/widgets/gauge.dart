@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 class GaugeChart extends StatelessWidget {
   double progress = 0.0;
   double max = double.maxFinite;
-  double min = 0;
   Size size = Size(200, 200);
   Text unit;
   Text above;
@@ -13,8 +12,7 @@ class GaugeChart extends StatelessWidget {
   VoidCallback onTab;
   static const def = Text('');
 
-  GaugeChart(
-      {this.progress, this.max, this.min, this.size, this.unit = def, this.above = def, this.below = def, this.onTab});
+  GaugeChart({this.progress, this.max, this.size, this.unit = def, this.above = def, this.below = def, this.onTab});
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +30,6 @@ class GaugeChart extends StatelessWidget {
                 painter: CircularCanvas(
                   progress: progress,
                   maxValue: max,
-                  minValue: min,
                   color: Theme.of(context).accentColor,
                   backgroundColor: Theme.of(context).accentColor.withOpacity(0.4),
                 ),
@@ -69,11 +66,10 @@ class GaugeChart extends StatelessWidget {
 class CircularCanvas extends CustomPainter {
   final double progress;
   final double maxValue;
-  final double minValue;
   final Color backgroundColor;
   final Color color;
 
-  CircularCanvas({this.progress, this.maxValue = 100, this.minValue = 0, this.backgroundColor, this.color});
+  CircularCanvas({this.progress, this.maxValue = 100, this.backgroundColor, this.color});
 
   double scale(unscaledNum, minAllowed, maxAllowed, min, max) {
     return (maxAllowed - minAllowed) * (unscaledNum - min) / (max - min) + minAllowed;
@@ -83,8 +79,8 @@ class CircularCanvas extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     final start = 4 / 5 * pi;
     final end = 7 / 5 * pi;
-    final scaled = scale(min(minValue, min(progress, maxValue)), 0, end, minValue, maxValue);
-    final color = scale(min(minValue, min(progress, maxValue)), 1, 9, minValue, maxValue).round() * 100;
+    final scaled = scale(progress.abs(), 0, end, 0, maxValue);
+    final color = scale(progress.abs(), 1, 9, 0, maxValue).round() * 100;
     var paint = Paint();
     paint
       ..color = backgroundColor
@@ -101,6 +97,6 @@ class CircularCanvas extends CustomPainter {
 
   @override
   bool shouldRepaint(CircularCanvas oldDelegate) {
-    return false; //oldDelegate.progress != progress;
+    return oldDelegate.progress != progress;
   }
 }

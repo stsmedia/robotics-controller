@@ -107,7 +107,6 @@ class _HoverGauges extends StatelessWidget {
             size: Size(size, size),
             progress: hoverService.right,
             max: 100,
-            min: 0,
             unit: Text("%"),
             above: Text("Right"),
             onTab: () => hoverService.direction(0, 0),
@@ -116,7 +115,6 @@ class _HoverGauges extends StatelessWidget {
             size: Size(size, size),
             progress: hoverService.lift,
             max: 100,
-            min: 0,
             unit: Text("%"),
             above: Text("Lift"),
             onTab: () {
@@ -127,7 +125,6 @@ class _HoverGauges extends StatelessWidget {
             size: Size(size, size),
             progress: hoverService.left,
             max: 100,
-            min: 0,
             unit: Text("%"),
             above: Text("Left"),
             onTab: () => hoverService.direction(0, 0),

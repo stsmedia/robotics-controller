@@ -76,7 +76,6 @@ class _SmarsGauges extends StatelessWidget {
             size: Size(size, size),
             progress: smarsService.right,
             max: 100,
-            min: -100,
             unit: Text("%"),
             above: Text("Right"),
             onTab: () {
@@ -87,7 +86,6 @@ class _SmarsGauges extends StatelessWidget {
             size: Size(size, size),
             progress: smarsService.left,
             max: 100,
-            min: -100,
             unit: Text("%"),
             above: Text("Left"),
             onTab: () {

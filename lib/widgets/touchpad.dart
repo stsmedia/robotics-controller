@@ -188,7 +188,7 @@ class AlldirectionsGridPainter extends CustomPainter {
     final paint = Paint()
       ..color = Colors.blue
       ..style = PaintingStyle.stroke
-      ..strokeWidth = 2;
+      ..strokeWidth = 1;
 
     Offset centreLeft = size.centerLeft(position);
     Offset centreRight = size.centerRight(position);
